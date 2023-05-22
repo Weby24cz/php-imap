@@ -589,11 +589,7 @@ class Message {
         $oAttachment = new Attachment($this, $part);
 
         if ($oAttachment->getName() !== null && $oAttachment->getSize() > 0) {
-            if ($oAttachment->getId() !== null) {
-                $this->attachments->put($oAttachment->getId(), $oAttachment);
-            } else {
-                $this->attachments->push($oAttachment);
-            }
+            $this->attachments->put(md5($oAttachment->getName() . $oAttachment->getSize() . $oAttachment->getContent()), $oAttachment);
         }
     }
 
